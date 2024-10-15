@@ -28,6 +28,8 @@ const Dashboard = () => {
         fetchProjects();
       }, []);
 
+      
+
       console.log('data',projects?.data);
       console.log('projects',projects);
 
@@ -49,9 +51,10 @@ const Dashboard = () => {
         {projects.data.map((project) => (
           <ProjectCard
             key={project.id}
-            name={project.name}
+            name={project.projectName}
             location={project.location}
             dueDate={project.dueDate}
+            id={project.id}
           />
         ))}
       </div>
