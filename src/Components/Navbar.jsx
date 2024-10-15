@@ -1,7 +1,10 @@
 
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-
+// import { useEffect, useState } from "react";
+// import axios from "../utils/axiosConfig";
 const NavBar = () => {
+   
+
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="https://flowbite-react.com">
@@ -17,7 +20,7 @@ const NavBar = () => {
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
+            <span className="block text-sm">nama</span>
             <span className="block truncate text-sm font-medium">name@flowbite.com</span>
           </Dropdown.Header>
           <Dropdown.Item>Dashboard</Dropdown.Item>

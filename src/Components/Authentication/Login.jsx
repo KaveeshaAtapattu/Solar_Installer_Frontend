@@ -8,17 +8,26 @@ function Login() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+ 
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/auth/login", { username, password });
-      localStorage.setItem("token", response.data.token);
-      setMessage("Login successful");
-      navigate("/protected");
+      const response = await axios.post("/auth/login", {
+        username,
+        password,
+      });
+  
+      const { token, user } = response.data; // Assume backend returns token and user data
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user)); // Store user data
+  
+      navigate("/user-details"); // Redirect to user details page
     } catch (error) {
-      setMessage("Invalid credentials");
+      console.error("Login failed", error);
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
