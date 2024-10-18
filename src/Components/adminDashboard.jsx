@@ -1,6 +1,7 @@
 // src/pages/Dashboard.jsx
 import React, { useEffect, useState } from 'react';
 import ProjectCard from './Project/ProjectCard';
+import LogoutButton from './Authentication/logoutButton';
 
 
 const Dashboard = () => {
@@ -46,6 +47,7 @@ const Dashboard = () => {
       <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
       <p>Welcome to the Solar Installer Admin Dashboard!</p>
     </div>
+    <LogoutButton />
 
     <div className="m-3 flex flex-wrap items-center justify-center gap-4">
         {projects.data.map((project) => (
