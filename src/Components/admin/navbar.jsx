@@ -1,4 +1,4 @@
-// src/Components/admin/navbar.jsx
+// src/Components/admin/Navbar.jsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -10,20 +10,43 @@ const Navbar = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
     localStorage.removeItem('role');
-    
-    // Navigate to the login page
-    navigate('/login');
+
+    // Navigate to the signout page
+    navigate('/signout');
+
+    // Reload the page to ensure all state resets
+    window.location.reload();
   };
 
   return (
-    <nav className="bg-blue-600 p-4 text-white">
-      <div className="container mx-auto flex justify-between">
-        <div className="flex space-x-4">
+    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg p-4">
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="flex items-center space-x-8">
+          {/* Logo or Brand Name */}
+          <Link to="/admin/dashboard" className="text-2xl font-bold text-white hover:text-gray-200">
+            Admin Dashboard
+          </Link>
+
           {/* Admin Navbar links */}
-          <Link to="/admin/dashboard" className="hover:text-gray-300">Dashboard</Link>
-          <Link to="/admin/projects/new" className="hover:text-gray-300">Add Project</Link>
+          <Link
+            to="/admin/projects/new"
+            className="text-white font-medium hover:text-gray-200 transition duration-300"
+          >
+            Add Project
+          </Link>
+          <Link
+            to="/register"
+            className="text-white font-medium hover:text-gray-200 transition duration-300"
+          >
+            Add User
+          </Link>
         </div>
-        <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded hover:bg-red-700">
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 hover:bg-red-700 transition duration-300 px-4 py-2 rounded text-white font-semibold"
+        >
           Logout
         </button>
       </div>

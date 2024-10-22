@@ -1,3 +1,4 @@
+// src/Components/installer/job/Status.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -31,46 +32,39 @@ const Status = ({ project, disableArriveButton, disableCompleteButton }) => {
   };
 
   return (
-    <div>
-      <h3>Update Status for Project: {project.projectName}</h3>
-      <p>Location: {project.location}</p>
-      <p>Due Date: {new Date(project.dueDate).toLocaleDateString()}</p>
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <h3 className="text-xl font-bold text-gray-800 mb-4">Update Status for Project: {project.projectName}</h3>
+      <p className="text-gray-600 mb-2">Location: {project.location}</p>
+      <p className="text-gray-600 mb-4">Due Date: {new Date(project.dueDate).toLocaleDateString()}</p>
 
+      {/* Button for Mark as Arrived */}
       <button
         onClick={handleMarkAsArrived}
         disabled={isArrived || disableArriveButton} // Disable if already arrived or passed via props
-        style={{
-          padding: '10px 20px',
-          backgroundColor: (isArrived || disableArriveButton) ? '#6c757d' : '#28a745',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: (isArrived || disableArriveButton) ? 'not-allowed' : 'pointer',
-          width: '100%',
-          marginBottom: '10px'
-        }}
+        className={`w-full py-2 mb-4 rounded-lg text-white font-semibold transition-colors ${
+          isArrived || disableArriveButton
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-green-500 hover:bg-green-600 cursor-pointer'
+        }`}
       >
         {isArrived ? 'Already Arrived' : 'Mark as Arrived'}
       </button>
 
+      {/* Button for Mark as Completed */}
       <button
         onClick={handleMarkAsCompleted}
         disabled={!isArrived || isCompleted || disableCompleteButton} // Enable only if arrived and not completed
-        style={{
-          padding: '10px 20px',
-          backgroundColor: (!isArrived || isCompleted || disableCompleteButton) ? '#6c757d' : '#007bff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: (!isArrived || isCompleted || disableCompleteButton) ? 'not-allowed' : 'pointer',
-          width: '100%',
-          marginBottom: '10px'
-        }}
+        className={`w-full py-2 mb-4 rounded-lg text-white font-semibold transition-colors ${
+          !isArrived || isCompleted || disableCompleteButton
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-blue-500 hover:bg-blue-600 cursor-pointer'
+        }`}
       >
         {isCompleted ? 'Already Completed' : 'Mark as Completed'}
       </button>
 
-      {message && <p style={{ color: 'red', marginTop: '10px' }}>{message}</p>}
+      {/* Message section */}
+      {message && <p className="text-red-500 mt-2">{message}</p>}
     </div>
   );
 };

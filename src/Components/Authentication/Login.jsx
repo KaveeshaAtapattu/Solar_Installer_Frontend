@@ -11,18 +11,18 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setMessage('');
-
+    
         try {
             const response = await axios.post('http://localhost:8080/login', {
                 email,
                 password
             });
-
+    
             // Save the token, user email, and role in local storage
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', response.data.user);
             localStorage.setItem('role', response.data.role);
-
+    
             // Trigger re-render by setting some state
             if (response.data.role === 'admin') {
                 // Wait for state and storage update, then navigate
@@ -30,11 +30,15 @@ const Login = () => {
             } else if (response.data.role === 'installer') {
                 navigate('/installer', { replace: true });  // Redirect installer users to the installer dashboard
             }
-
+    
+            // Reload the page after successful login
+            window.location.reload();
+    
         } catch (error) {
             setMessage(error.response?.data?.message || "An error occurred");
         }
     };
+    
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">

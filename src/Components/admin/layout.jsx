@@ -4,14 +4,16 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './dashboard';
 import ProjectForm from './Project/projectForm';
 import ProjectEditForm from './Project/projectEditForm';
-import Navbar from './Navbar';
+import Navbar from './navbar';
 
 const AdminLayout = () => {
   return (
-    <div className="admin-layout">
-      <Navbar /> {/* Navbar visible on all pages */}
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      {/* Navbar visible on all pages */}
+      <Navbar />
 
-      <div className="content-area">
+      {/* Main content area */}
+      <div className="flex-1 container mx-auto p-6 mt-4">
         <Routes>
           {/* Admin Dashboard */}
           <Route path="/dashboard" element={<Dashboard />} />

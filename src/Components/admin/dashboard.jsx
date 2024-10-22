@@ -18,7 +18,7 @@ const Dashboard = () => {
           throw new Error('Failed to fetch projects');
         }
         const data = await response.json();
-        setProjects(data);
+        setProjects(data.data || []); // Assuming that the data is under a "data" property
       } catch (err) {
         setError(err.message);
       } finally {
@@ -38,28 +38,32 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    return <p>Loading projects...</p>;
+    return <p className="text-center mt-10 text-gray-600">Loading projects...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p className="text-center mt-10 text-red-600">Error: {error}</p>;
   }
 
   return (
-    <>
-
-      <div className="m-3 flex flex-wrap items-center justify-center gap-4">
-        {projects.data.map((project) => (
-          <ProjectCard
-            key={project.id}
-            name={project.projectName}
-            location={project.location}
-            dueDate={project.dueDate}
-            id={project.id}
-          />
-        ))}
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="container mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Projects Dashboard</h1>
+        <div className="flex flex-wrap justify-center gap-4">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              name={project.projectName}
+              location={project.location}
+              dueDate={project.dueDate}
+              id={project.id}
+              completedAt={project.CompletedAt}
+              attendedAt={project.AttendedAt}
+            />
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
